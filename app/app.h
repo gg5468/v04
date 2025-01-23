@@ -28,32 +28,25 @@ namespace vsite::oop::v4
 	class tarantula : public spider {
 	public:
 		std::string species() const override;
-		tarantula();
 	};
 
 	class cockroach : public insect {
 	public:
 		std::string species() const override;
-		cockroach();
 	};
 
 	class sparrow : public bird {
 	public:
 		std::string species() const override;
-		sparrow();
 	};
 
 	class leg_counter {
 	public:
-		unsigned int l = 0;
 		std::string add_animal(animal* an);
 		unsigned int legs();
+	private:
+		unsigned int l = 0;
 	};
 
-	class animal_factory {
-	public:
-		animal* an = nullptr;
-		animal* get();
-		animal_factory(int);
-	};
+	std::unique_ptr<animal> animal_factory(const int animal_number);
 }

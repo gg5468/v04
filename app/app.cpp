@@ -22,10 +22,6 @@ namespace vsite::oop::v4
 		return "sparrow";
 	}
 
-	cockroach::cockroach() {};
-	sparrow::sparrow() {};
-	tarantula::tarantula() {};
-
 	std::string leg_counter::add_animal(animal* an)
 	{
 		l += an->legs();
@@ -36,19 +32,18 @@ namespace vsite::oop::v4
 		return l;
 	}
 
-	animal_factory::animal_factory(int i) {
-		if (i == 1) {
-			an = new cockroach;
+	std::unique_ptr<animal> animal_factory(const int animal_number)
+	{
+		switch (animal_number)
+		{
+		case 1:
+			return std::make_unique<cockroach>();
+		case 2:
+			return std::make_unique<sparrow>();
+		case 3:
+			return std::make_unique<tarantula>();
+		default:
+			return nullptr;
 		}
-		else if (i == 2) {
-			an = new sparrow;
-		}
-		else if (i == 3) {
-			an = new tarantula;
-		}
-	}
-
-	animal* animal_factory::get() {
-		return an;
 	}
 }
